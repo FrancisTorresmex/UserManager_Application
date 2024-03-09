@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="~/css/Access.css" asp-append-version="true" />
+
+<div class="containerLogin">
+    <div id="cardLogin">
+        <form id="userLogin" asp-action="Login" asp-controller="Access" method="post">
+
+            <div class="col-12">
+                <div class="col-12" id="divImgLogin">
+                    <img id="imgLogin" src="~/Image/login2.jpg" />
+                </div>
+                
+                <label id="titleUserForm">@Localizer["Login"]</label>
+                <div class="form-group" id="inputAccessEmail">
+                    <label for="Email">@Localizer["Email"]</label>
+                    <input name="Email" id="inpAccessEmail" class="form-control requiredAccess" required>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9" id="inputAccessPass">
+                        <label for="Password">@Localizer["Password"]</label>
+                        <input type="password" name="Password" id="inpAccessPassword" class="form-control requiredAccess" required>
+                    </div>
+                    <div class="col-3" id="btnSeePassDiv">
+                        <button type="button" onclick="seePassword(event)" id="btnSeePass"><i class="fas fa-eye"></i></button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </form>
+
+        <div id="btnLoginDiv" class="col-12">
+            @*<input class="btn btn-success" type="submit" value="send">*@
+            <button id="btnLogin" class="btn btn-primary" onclick="login()">@Localizer["Send"]</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/js/access.js"></script>

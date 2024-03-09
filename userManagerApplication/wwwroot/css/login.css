@@ -1,0 +1,30 @@
+﻿.containerGralLogin {
+    min-width: 100vw;
+    width: 80vw;
+    height: 90vh;    
+    overflow-y: auto;
+    background-image: url('../Image/LoginBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/*footer*/
+.footerGralLogin {
+    background-color: black;
+    min-height: 10vh;
+}
+
+.containerFooterGralLogin {
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+    .containerFooterGralLogin a {
+        color: lightseagreen;
+        text-decoration:none;
+    }
+
+
+

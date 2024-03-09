@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization
+@using userManagerApplication.Controllers
+
+@inject IStringLocalizer<PagesController> _localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - userManagerApplication</title>
+    <link rel="stylesheet" href="~/fontawesomeFree/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/userManagerApplication.styles.css" asp-append-version="true" />        
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />*@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/fh-3.4.0/r-2.5.0/datatables.min.css" rel="stylesheet">
+    
+
+</head>
+<body>
+
+    @*check if it is the login screen*@
+    @{
+        var isLoginPage = ViewContext.RouteData.Values["controller"].ToString() == "Access" && ViewContext.RouteData.Values["action"].ToString() == "Index";
+    }
+
+    <header>
+
+        <div @(isLoginPage == true ? "style=display:none" : "")>
+            @* <label class="lblMenu">Menu</label> *@
+            <nav class="navbarCustom">
+
+                <div class="sidenav">
+                    <div class="containerImgLangMenu">
+                        <img onclick="closeSesion()" id="imgCloseSesionMenu" src="~/Image/closeSesion.png" alt="Sesion" />
+                        <img id="imgLanguageMenu"  src="~/Image/languageUS.png" alt="Language"/>
+                                  
+                        <div id="menuLanguageOption" class="hiddenMenuLanguage">
+                            <ul>
+                                <li onclick="changeLanguageMenu('es-ES', '/Image/languageES.png')"><img id="imgLanguageMenuOp" src="~/Image/languageES.png" alt="Language" /></li>
+                                <li onclick="changeLanguageMenu('en-US', '/Image/languageUS.png')"><img id="imgLanguageMenuOp" src="~/Image/languageUS.png" alt="Language" /></li>
+                            </ul>
+                        </div>
+                        
+
+                    </div>
+                    <ul class="sidenavUl clearfixMenu"></ul>
+                </div>
+
+                
+            </nav>
+        </div>
+
+        <div class="navbarCustom" style="background-color:black;" @(isLoginPage == true ? "" : "style=display:none")></div>
+
+    </header>
+
+    <div class="container" id="content">
+        <main role="main">
+            <div id="dynamicContentContainer">
+                @RenderBody()
+
+            </div>
+            
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="containerFooter">
+            &copy; 2024 - User Manager Application - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/fh-3.4.0/r-2.5.0/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>    
+       
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

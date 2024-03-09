@@ -1,0 +1,28 @@
+﻿
+<link rel="stylesheet" href="~/css/adminPanel.css" asp-append-version="true" />
+
+<div class="modalCustomWidth" tabindex="-1">
+    <div class="modal-header">
+        <h4 class="modal-title">User pages</h4>
+        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+
+        <form id="editUserPagesForm" asp-action="UpdateUser" asp-controller="Admin" method="post">
+            <div id="containerUserPagesCheck" class="col-12"></div>
+        </form>
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="btnUpdateUserPages" form="editUserPagesForm" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</div>
+
+<script src="~/js/userPagesModal.js"></script>
+
+@section Scripts {    
+    
+}
+

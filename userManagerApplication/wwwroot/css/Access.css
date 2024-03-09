@@ -1,0 +1,80 @@
+﻿.containerLogin {
+    margin-top: 3vw;
+    width: 100%;
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#divImgLogin {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+#imgLogin {
+    border-radius: 10px;
+    max-width: 200px;
+    min-width: 200px;
+}
+
+#cardLogin {
+    background-color: white; 
+    margin: 0;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    min-width: 25vw;    
+    border-radius: 20px;
+}
+
+    #cardLogin:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+#titleUserForm {
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#userLogin {
+    padding: 20px;
+}
+#inputAccessEmail {
+    /*margin-left: 20px;
+    width: 50vh;*/
+}
+
+#inputAccessPassword {
+    width: 50vh;
+}
+
+#btnSeePass {
+    border-radius: 20px;
+    background-color: revert-layer;
+    border: 0;
+}
+
+#btnSeePassDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#btnLoginDiv {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px;
+}
+
+#btnLogin {
+    background: transparent;
+    color: lightseagreen;
+    font-weight: bold;
+    border: 0;
+}

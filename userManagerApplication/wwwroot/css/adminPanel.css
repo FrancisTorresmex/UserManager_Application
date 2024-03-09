@@ -1,0 +1,27 @@
+﻿
+.panelbtns {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20px;
+}
+
+#titleUserForm {
+    font-size: 25px;
+}
+
+#divSelRole {
+    width: 40%;
+    margin-left: 10px;
+    border-color: darkgray;
+}
+
+.tableAdmin {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#btnUserPages {
+    width: 15vw;
+    margin-left: 10px;
+    margin-top: 5px;
+}
