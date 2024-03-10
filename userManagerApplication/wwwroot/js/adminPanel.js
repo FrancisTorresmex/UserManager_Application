@@ -54,8 +54,32 @@ function successGetAllRoles(data) {
 }
 
 
+function languageType() {
+    let adminLanguage = '';
+    var culture = getCookie("Language");
+    if (culture != '') {
+        switch (culture) {
+            case 'es-ES':
+                adminLanguage = "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json";
+                break;
+            case 'en-US':
+                adminLanguage = "";
+                break;
+            default:
+                adminLanguage = "";
+                break;
+        }
+    }
+
+    return adminLanguage;
+    
+}
+
 
 function createTableUsers() {
+
+    var language = languageType();
+
     tblUsers = $("#userTable").DataTable({        
         "paging": true,
         "destroy": true,
@@ -66,6 +90,9 @@ function createTableUsers() {
         "responsive": true,
         "autoWidth": false,
         "processing": true,
+        "language": {
+            "url": language
+        },
         columns: [
             { data: 'IdUser' },
             { data: 'Name' },
@@ -81,8 +108,10 @@ function createTableUsers() {
                 render: function (data, type, full, meta) {
                     var userId = data.IdUser;
                     var userStatus = data.statusName;
-                    return '<button type="button" class="btn btn-primary" data-id="' + userId + '" id="btnUpdateUser" onclick="openModalUpdateUser(' + userId + ')">Edit</button>' +
-                        '<button class="btn btn-info" data-id="' + userId + '"  id="btnInacivateUser' + userId + '" onclick="inactiveActiveUser(\'' + userId + '\', \'' + userStatus + '\')">' + (data.StatusName == "Inactive" ? "Active" : "Inactive") + '</button>';
+
+
+                    return '<button type="button" class="btn btn-primary" data-id="' + userId + '" id="btnUpdateUser" onclick="openModalUpdateUser(' + userId + ')"><i class="far fa-edit"></i></button>' +
+                        '<button class="btn btn-info" data-id="' + userId + '"  id="btnInacivateUser' + userId + '" onclick="inactiveActiveUser(\'' + userId + '\', \'' + userStatus + '\')"> <i class="fas fa-ban"></i> </button>';
                 }
             }
         ]

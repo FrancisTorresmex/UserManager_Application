@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Globalization;
 using userManagerAplication.Models.Data;
 using userManagerApplication.Auxiliary;
 using userManagerApplication.Models;
@@ -74,6 +75,10 @@ namespace userManagerApplication.Controllers
 
             List<UserModel> users = _repository.GetAllUserAndRoles();
             ViewBag.Users = users;
+
+            string culture = Request.Cookies["Language"];
+            if (culture != null)
+                CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
             var response = new JObject
             {

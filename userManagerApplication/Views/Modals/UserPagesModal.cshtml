@@ -1,9 +1,12 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+
+
 <link rel="stylesheet" href="~/css/adminPanel.css" asp-append-version="true" />
 
 <div class="modalCustomWidth" tabindex="-1">
     <div class="modal-header">
-        <h4 class="modal-title">User pages</h4>
+        <h4 class="modal-title">@Localizer["Title"]</h4>
         <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
@@ -15,8 +18,8 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" id="btnUpdateUserPages" form="editUserPagesForm" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="btnUpdateUserPages" form="editUserPagesForm" class="btn btn-success">@Localizer["Save"]</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Cancel"]</button>
     </div>
 </div>
 

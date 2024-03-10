@@ -1,10 +1,15 @@
-﻿@model userManagerApplication.Models.UserModel;
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@model userManagerApplication.Models.UserModel;
+
+@inject IViewLocalizer Localizer
+
+
 
 <link rel="stylesheet" href="~/css/adminPanel.css" asp-append-version="true" />
 
 <div class="modalCustomWidth" tabindex="-1">
     <div class="modal-header">
-        <h4 class="modal-title">Edit user</h4>
+        <h4 class="modal-title">@Localizer["User"]</h4>
         <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
@@ -12,51 +17,51 @@
         <form id="editUserForm" asp-action="UpdateUser" asp-controller="Admin" method="post">
 
             <div class="col-12">
-                <label id="titleUserForm">User information</label>
+                <label id="titleUserForm">@Localizer["TitleEditUser"]</label>
                 <div class="form-group">
-                    <label for="Name">Name</label>
+                    <label for="Name">@Localizer["Name"]</label>
                     <input id="nameCreateUser" name="Name" class="form-control requiredCreateUser">
-                    @Html.LabelFor(model => model.Name)
+                    @* @Html.LabelFor(model => model.Name) *@
                 </div>
                 <div class="form-group">
-                    <label for="LastName">LastName</label>
+                    <label for="LastName">@Localizer["LastName"]</label>
                     <input id="lastNameCreateUser" name="LastName" class="form-control requiredCreateUser">
-                    @Html.LabelFor(model => model.LastName)
+                    @* @Html.LabelFor(model => model.LastName) *@
                 </div>
                 <hr />
             </div>
 
             <div class="col-12">
-                <label id="titleUserForm">Contact</label>
+                <label id="titleUserForm">@Localizer["Contact"]</label>
                 <div class="form-group">
-                    <label for="Phone">Phone</label>
-                    <input name="Phone" class="form-control">
-                    @Html.LabelFor(model => model.Phone)
+                    <label for="Phone">@Localizer["Phone"]</label>
+                    <input id="phoneCreateUser" name="Phone" class="form-control requiredCreateUser">
+                    @* @Html.LabelFor(model => model.Phone) *@
                 </div>
                 <div class="form-group">
-                    <label for="Email">Email</label>
-                    <input name="Email" class="form-control">
-                    @Html.LabelFor(model => model.Email)
+                    <label for="Email">@Localizer["Email"]</label>
+                    <input id="emailCreateUser" name="Email" class="form-control requiredCreateUser">
+                    @* @Html.LabelFor(model => model.Email) *@
                 </div>
                 <hr />
             </div>
 
             <div class="col-12" id="divSelRole">
-                <label id="titleUserForm">Access</label>
+                <label id="titleUserForm">@Localizer["Access"]</label>
                 <div class="form-group">
                     <div class="row">
-                        <label for="Role" class="col-form-label">Role</label>
+                        <label for="Role" class="col-form-label">@Localizer["Role"]</label>
                         <select name="Role" id="selRoleUser" class="form-comtrol requiredCreateUser">
                             <option value="-1" selected>Select</option>
                             @*<option value="1" selected>pipa</option>*@
                         </select>
-                        @Html.LabelFor(model => model.IdRole)
+                        @* @Html.LabelFor(model => model.IdRole) *@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Password">Password</label>
+                    <label for="Password">@Localizer["Password"]</label>
                     <input id="passwordCreateUser" name="Password" class="form-control requiredCreateUser">
-                    @Html.LabelFor(model => model.Password)
+                    @* @Html.LabelFor(model => model.Password) *@
                 </div>
                 <hr />
             </div>
@@ -65,18 +70,18 @@
         </form>
 
         <div class="col-12">
-            <label id="titleUserForm">User pages</label>
+            <label id="titleUserForm">@Localizer["UserPage"]</label>
             <div class="form-group">
                 <div class="row">
-                    <button class="btn btn-dark" id="btnUserPages">Open user pages</button>
+                    <button class="btn btn-dark" id="btnUserPages">@Localizer["OpenModalUserPages"]</button>
                 </div>
             </div>
         </div>
 
     </div>
     <div class="modal-footer">
-        <button type="button" id="btnUpdateUser" form="editUserForm" class="btn btn-success" onclick="updateUser()">Save</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="btnUpdateUser" form="editUserForm" class="btn btn-success" onclick="updateUser()">@Localizer["Save"]</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Cancel"]</button>
     </div>
 </div>
 

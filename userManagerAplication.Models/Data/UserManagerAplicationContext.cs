@@ -19,15 +19,16 @@ public partial class UserManagerAplicationContext : DbContext
 
     public virtual DbSet<Screen> Screens { get; set; }
 
+    public virtual DbSet<TranslationScreen> TranslationScreens { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UsersRole> UsersRoles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        //optionsBuilder.UseSqlServer("Server=LAPTOP-TF5M9SUU;Database=UserManagerAplication;Trusted_Connection=True;TrustServerCertificate=True;");
-    } 
- 
+
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +54,20 @@ public partial class UserManagerAplicationContext : DbContext
             entity.Property(e => e.CreationDate).HasColumnType("datetime");
             entity.Property(e => e.Name).IsUnicode(false);
             entity.Property(e => e.Url).IsUnicode(false);
+        });
+
+        modelBuilder.Entity<TranslationScreen>(entity =>
+        {
+            entity.HasKey(e => e.IdLanguage).HasName("PK__Translat__1656D91748AFAF89");
+
+            entity.Property(e => e.Translation)
+                .HasMaxLength(6)
+                .IsUnicode(false);
+            entity.Property(e => e.Value).IsUnicode(false);
+
+            entity.HasOne(d => d.IdScreenNavigation).WithMany(p => p.TranslationScreens)
+                .HasForeignKey(d => d.IdScreen)
+                .HasConstraintName("FK__Translati__IdScr__5FB337D6");
         });
 
         modelBuilder.Entity<User>(entity =>

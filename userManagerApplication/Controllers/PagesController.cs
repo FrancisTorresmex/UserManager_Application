@@ -20,15 +20,15 @@ namespace userManagerApplication.Controllers
         private readonly IConfiguration _configuration;
         private readonly IGenericRepository<AccessScreen> _repositoryAccesScr;
         private readonly IGenericRepository<Screen> _repositoryScr;
-        //private readonly IStringLocalizerFactory _localizer; //localizacion / globalizacion
-        private readonly IStringLocalizer<HomeController> _localizer; //localizacion / globalizacion
+        private readonly IGenericRepository<TranslationScreen> _repositoryTranslationScr;
 
-        public PagesController(IConfiguration configuration, IGenericRepository<AccessScreen> repositoryAccesScr, IGenericRepository<Screen> repositoryScr, IStringLocalizer<HomeController> localizer /*IStringLocalizerFactory localizer*/)
+
+        public PagesController(IConfiguration configuration, IGenericRepository<AccessScreen> repositoryAccesScr, IGenericRepository<Screen> repositoryScr, IGenericRepository<TranslationScreen> repositoryTranslationScr)
         {
             _configuration = configuration;
             _repositoryAccesScr = repositoryAccesScr;
             _repositoryScr = repositoryScr;
-            _localizer = localizer;
+            _repositoryTranslationScr = repositoryTranslationScr;
         }
 
         [AllowAnonymous]
@@ -52,11 +52,6 @@ namespace userManagerApplication.Controllers
         public IActionResult PartialIndex(string action = "Index")
         {
             action = "Index";
-
-            string culture = Request.Cookies["Language"];
-            if (culture != null)
-                CultureInfo.CurrentUICulture = new CultureInfo(culture);
-
             var response = new JObject
             {
                 ["data"] = this.RenderPartialViewToString(action, null)
@@ -78,36 +73,39 @@ namespace userManagerApplication.Controllers
                 int idUser = Convert.ToInt16(HttpContext.Request.Cookies["IdUser"]);                
                 var userAccess = _repositoryAccesScr.Find(x => x.IdUser == idUser, "IdScreenNavigation").ToList();
 
-                var r = _localizer.GetString("Home");
-
                 //language cookie
                 string culture = Request.Cookies["Language"];
-                CultureInfo.CurrentUICulture = new CultureInfo(culture);
-                //var localizerPages = _localizer.Create(typeof(PagesController));
 
-                var t = _localizer.GetString("Home");
+                //By default English, if the culture is en-US, it is not necessary to translate
+                var screens = new List<ScreenModel>();
+                if (culture != "en-US")
+                {
+                    //Only the menu is translated through db, the rest is through localizer in program.cs
+                    var translation = _repositoryTranslationScr.Find(x => x.Translation == culture, "IdScreenNavigation").ToList();
 
-                var screens = userAccess
-                    .Select(x => new ScreenModel
-                    {
-                        Id = (int)x.IdScreen,
-                        Title = _localizer.GetString(x.IdScreenNavigation.Name), //name according to location
-                        URL = x.IdScreenNavigation.Url,
-                    })
-                    .OrderBy(o => o.Id)
-                    .ToList();
-
+                    screens = userAccess
+                        .Select(x => new ScreenModel
+                        {
+                            Id = (int)x.IdScreen,
+                            Title = translation.FirstOrDefault(t => t.IdScreen == x.IdScreen).Value, //name according to value id
+                            URL = x.IdScreenNavigation.Url,
+                        })
+                        .OrderBy(o => o.Id)
+                        .ToList();
+                }
+                else
+                {
+                    screens = userAccess
+                        .Select(x => new ScreenModel
+                        {
+                            Id = (int)x.IdScreen,
+                            Title = x.IdScreenNavigation.Name, //name according to value id
+                            URL = x.IdScreenNavigation.Url,
+                        })
+                        .OrderBy(o => o.Id)
+                        .ToList();
+                }
                 
-
-                ////add close sesion
-                //var screenClose = new ScreenModel
-                //{
-                //    Id = -1,
-                //    Title = localizerPages["SignOff"],
-                //    URL = "/Access",
-                //};
-                //screens.Add(screenClose);
-
                 response.Data = screens;
                 response.Success = true;
 
@@ -134,13 +132,41 @@ namespace userManagerApplication.Controllers
             {
                 var scr = _repositoryScr.GetAll();
                 var userAccess = _repositoryAccesScr.Find(x => x.IdUser == idUser, "IdScreenNavigation").ToList();
-                var screens = scr.Select(x => new ScreenUserModel
+
+                //language cookie
+                string culture = Request.Cookies["Language"];
+
+                //By default English, if the culture is en-US, it is not necessary to translate
+                IEnumerable<ScreenUserModel> screens = null;
+                if (culture != "en-US")
                 {
-                    Id = (int)x.IdScreen,
-                    Title = x.Name,
-                    URL = x.Url,
-                    UserAccess = userAccess.Any(y => y.IdScreen == x.IdScreen)
-                });
+                    //Only the menu is translated through db, the rest is through localizer in program.cs
+                    var translation = _repositoryTranslationScr.Find(x => x.Translation == culture, "IdScreenNavigation").ToList();
+
+                    screens = scr
+                        .Select(x => new ScreenUserModel
+                        {
+                            Id = (int)x.IdScreen,
+                            Title = translation.FirstOrDefault(t => t.IdScreen == x.IdScreen).Value, //name according to value id
+                            URL = x.Url,
+                            UserAccess = userAccess.Any(y => y.IdScreen == x.IdScreen)
+                        })
+                        .OrderBy(o => o.Id);
+                }
+                else
+                {
+                    screens = scr
+                        .Select(x => new ScreenUserModel
+                        {
+                            Id = (int)x.IdScreen,
+                            Title = x.Name, //name according to value id
+                            URL = x.Url,
+                            UserAccess = userAccess.Any(y => y.IdScreen == x.IdScreen)
+                        })
+                        .OrderBy(o => o.Id);
+                        
+                }
+
 
                 response.Data = screens;
                 response.Success = true;

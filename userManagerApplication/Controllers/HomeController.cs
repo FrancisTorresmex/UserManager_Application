@@ -68,8 +68,6 @@ namespace userManagerApplication.Controllers
         {
             action = "Index";
 
-            var t = _localizer.GetString("Home");
-
             string culture = Request.Cookies["Language"];
             if (culture != null)
                 CultureInfo.CurrentUICulture = new CultureInfo(culture);

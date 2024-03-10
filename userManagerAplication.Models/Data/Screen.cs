@@ -16,4 +16,6 @@ public partial class Screen
     public string? Url { get; set; }
 
     public virtual ICollection<AccessScreen> AccessScreens { get; set; } = new List<AccessScreen>();
+
+    public virtual ICollection<TranslationScreen> TranslationScreens { get; set; } = new List<TranslationScreen>();
 }
