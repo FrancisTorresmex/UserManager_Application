@@ -1,4 +1,6 @@
 ﻿
+
+
 .panelbtns {
     display: flex;
     flex-direction: row-reverse;
@@ -6,13 +8,27 @@
 }
 
 #titleUserForm {
+    width:100%;
+    text-align: center;
     font-size: 25px;
 }
 
+#accessContainer {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    width: 100%;
+}
+
 #divSelRole {
-    width: 40%;
-    margin-left: 10px;
+    width: 50%;
     border-color: darkgray;
+}
+
+#divPasswordUserUpdate {
+    width: 50%;
 }
 
 .tableAdmin {
@@ -21,7 +37,47 @@
 }
 
 #btnUserPages {
-    width: 15vw;
+    width: auto;
     margin-left: 10px;
     margin-top: 5px;
 }
+
+/*desktop*/
+@media only screen and (min-width: 769px) {
+    #tableUserContainer {
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        max-height: 82vh;
+        overflow-y: auto;
+    }
+}
+
+/*tablet*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    #tableUserContainer {
+        width: 100% !important; 
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin-bottom: 15vh;
+        overflow-y: auto;
+    }
+}
+
+/*mobile*/
+@media only screen and (max-width: 480px) {
+    #tableUserContainer {
+        min-width: 80vw;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        margin-bottom: 15vh;
+        overflow-y: auto;
+    }
+}
+
+
+
+
+

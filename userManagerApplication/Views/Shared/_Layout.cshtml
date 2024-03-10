@@ -33,7 +33,14 @@
 
         <div @(isLoginPage == true ? "style=display:none" : "")>
             @* <label class="lblMenu">Menu</label> *@
-            <nav class="navbarCustom">
+
+            @* menu mobile *@
+            <div class="menu-toggle" id="mobile-menu">
+                <button type="button" id="btnMobileToggleMenu" class="btn btn-outline"><i class="fa fa-bars"></i></button>
+            </div>
+            
+            @* menu desktop *@
+            <nav class="navbarCustom" id="desktop-navbar">
 
                 <div class="sidenav">
                     <div class="containerImgLangMenu">
@@ -54,6 +61,9 @@
 
                 
             </nav>
+
+           
+
         </div>
 
         <div class="navbarCustom" style="background-color:black;" @(isLoginPage == true ? "" : "style=display:none")></div>

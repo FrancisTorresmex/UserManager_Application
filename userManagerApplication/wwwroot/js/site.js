@@ -28,11 +28,37 @@ $(document).ready(function () {
         }
         
     }
-    
+
+    //toggle menu mobile
+    const mobileMenuButton = document.getElementById('mobile-menu');
+    const navbarMobile = document.querySelector('.navbarCustom');
+    const toggleMenubtn = document.getElementById("btnMobileToggleMenu").querySelector("i");
+
+    mobileMenuButton.addEventListener('click', function () {
+        
+        /*mobileMenuButton.style.display = (mobileMenuButton.style.display === 'none' || mobileMenuButton.style.display === '') ? 'block' : 'none';*/
+        navbarMobile.style.display = (navbarMobile.style.display === 'none' || navbarMobile.style.display === '') ? 'block' : 'none';
+
+        if (toggleMenubtn.classList.contains("fa-bars")) {
+            toggleMenubtn.classList.remove("fa-bars");
+            toggleMenubtn.classList.add("fa-times");
+        } else {
+            toggleMenubtn.classList.remove("fa-times");
+            toggleMenubtn.classList.add("fa-bars");
+        }
+
+    });
+    //end toggle menu mobile
 
     //allows using partial indexes of controllers
     $("nav.navbarCustom ul.sidenavUl").on('click', 'a', function (e) {
         e.preventDefault();
+
+        //close toggle menu when pressing, only if mobile
+        //if (mobileMenuButton.style.display === 'block') {
+        //    navbarMobile.style.display = (navbarMobile.style.display === 'block' || navbarMobile.style.display === '') ? 'block' : 'none';
+        //}
+        
 
         // Add the background to the parent <li> element of the clicked <a> link with jquery
         $("nav.navbarCustom ul.sidenavUl li").removeClass('selectedUlMenu');
@@ -56,6 +82,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    
 
 
     //Lenguage sub menu
