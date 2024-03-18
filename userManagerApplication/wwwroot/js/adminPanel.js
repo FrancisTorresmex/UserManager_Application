@@ -93,6 +93,13 @@ function createTableUsers() {
         "language": {
             "url": language
         },
+        "dom": 'Bfltip',
+        "buttons": [
+            'copy', 
+            'excel', 
+            'csv', 
+            'pdf'
+        ],
         columns: [
             { data: 'IdUser' },
             { data: 'Name' },

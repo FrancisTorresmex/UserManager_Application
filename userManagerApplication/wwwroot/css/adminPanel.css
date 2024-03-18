@@ -1,6 +1,22 @@
 ﻿
+/*buttons data table (excel, pdf etc)*/
+.dt-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
 
+.buttons-html5 {
+    background-color: white !important;
+    border-radius: 10px !important;
 
+}
+
+.dt-length {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*end buttons data table*/
 .panelbtns {
     display: flex;
     flex-direction: row-reverse;
